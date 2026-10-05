@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Student Result Dashboard</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: rgb(220, 232, 250);
+            background-image: url("./ALLIANCE.jpeg");
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            background-color: rgb(137, 180, 254);
+            height: 100px;
+            padding-top: 35px;
+            border-bottom: 4px solid black;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .box {
+            width: 600px;
+            margin: 30px auto;
+            border: 4px solid black;
+            padding: 25px;
+            border-radius: 20px;
+            font-size: 20px;
+            background-color: rgb(255, 255, 231);
+        }
+        .wide {
+            width: 900px;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .row label {
+            width: 180px;
+        }
+        .row input, .row select {
+            width: 300px;
+        }
+        input, select {
+            padding: 6px;
+            font-size: 16px;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 8px 20px;
+            font-size: 16px;
+            margin: 0 8px;
+            cursor: pointer;
+        }
+        #para {
+            margin-top: 25px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 2px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: rgb(137, 180, 254);
+        }
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+        footer {
+            margin-top: 50px;
+            background-color: rgb(137, 190, 254);
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            border-top: 4px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Student Result Dashboard</h1>
+
+    <form>
+        <div class="box">
+            <h3>Enter student details</h3>
+
+            <div class="row">
+                <label>Student Name :</label>
+                <input type="text" id="i1">
+            </div>
+            <div class="row">
+                <label>Student Reg :</label>
+                <input type="text" id="i2">
+            </div>
+            <div class="row">
+                <label>Python Marks :</label>
+                <input type="number" id="i3">
+            </div>
+            <div class="row">
+                <label>Java Marks :</label>
+                <input type="number" id="i4">
+            </div>
+            <div class="row">
+                <label>HTML Marks :</label>
+                <input type="number" id="i5">
+            </div>
+            <div class="row">
+                <label>Course :</label>
+                <select id="course">
+                    <option value="MCA">MCA</option>
+                    <option value="BCA">BCA</option>
+                </select>
+            </div>
+
+            <div class="buttons">
+                <button onclick="Check()" type="button">Results</button>
+                <button type="reset">Reset</button>
+            </div>
+            <p id="para"></p>
+        </div>
+    </form>
+
+    <div class="box wide">
+        <h3>All students</h3>
+        <div class="row">
+            <label style="width: 100px;">Search :</label>
+            <input type="text" id="searchBox" placeholder="Enter name or reg no" onkeyup="showTable()">
+        </div>
+        <table>
+            <tr>
+                <th>Reg</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Total</th>
+                <th>Percentage</th>
+                <th>Grade</th>
+                <th>Result</th>
+            </tr>
+            <tbody id="studentTable"></tbody>
+        </table>
+        <p id="summary"></p>
+    </div>
+
+    <footer>
+        <p>2026 Interactive Student Result Dashboard</p>
+    </footer>
+
+    <script>
+        let students = [];
+
+        function Check() {
+            let n1 = document.getElementById('i1').value;
+            let n2 = document.getElementById('i2').value;
+            let m3 = document.getElementById('i3').value;
+            let m4 = document.getElementById('i4').value;
+            let m5 = document.getElementById('i5').value;
+            let course = document.getElementById('course').value;
+
+            if (n1 == "" || n2 == "" || m3 == "" || m4 == "" || m5 == "") {
+                alert("Please fill all the fields");
+                return;
+            }
+
+            let n3 = Number(m3);
+            let n4 = Number(m4);
+            let n5 = Number(m5);
+
+            if (n3 < 0 || n3 > 100 || n4 < 0 || n4 > 100 || n5 < 0 || n5 > 100) {
+                alert("Marks should be between 0 and 100");
+                return;
+            }
+
+            for (let i = 0; i < students.length; i++) {
+                if (students[i].reg == n2) {
+                    alert("This Reg no is already added");
+                    return;
+                }
+            }
+
+            let total = n3 + n4 + n5;
+            let Avg = total / 3;
+            let percentage = (total / 300) * 100;
+            let grade;
+
+            if (Avg >= 80) {
+                grade = "A+";
+            } else if (Avg >= 60) {
+                grade = "B";
+            } else if (Avg >= 40) {
+                grade = "C";
+            } else {
+                grade = "D";
+            }
+
+            let status;
+            if (Avg >= 40) {
+                status = "Pass";
+            } else {
+                status = "Fail";
+            }
+
+            document.getElementById('para').innerHTML =
+            "<h2>STUDENT DETAILS</h2>" + "------------------" + "<br>"
+            + "Student Name : " + n1 + "<br>"
+            + "Student Reg : " + n2 + "<br>"
+            + "Course : " + course + "<br>"
+            + "Python Marks : " + n3 + "<br>"
+            + "Java Marks : " + n4 + "<br>"
+            + "HTML Marks : " + n5 + "<br>"
+            + "Total Marks : " + total + "<br>"
+            + "Average Marks : " + Avg.toFixed(1) + "<br>"
+            + "Percentage : " + percentage.toFixed(1) + "%" + "<br>"
+            + "Grade : " + grade + "<br>"
+            + "Result : " + status;
+
+            students.push({
+                reg: n2,
+                name: n1,
+                course: course,
+                total: total,
+                percentage: percentage.toFixed(1),
+                grade: grade,
+                status: status
+            });
+
+            showTable();
+        }
+
+        function showTable() {
+            let text = document.getElementById('searchBox').value.toLowerCase();
+            let rows = "";
+            let passed = 0;
+
+            for (let i = 0; i < students.length; i++) {
+                let s = students[i];
+
+                if (s.status == "Pass") {
+                    passed++;
+                }
+
+                if (s.name.toLowerCase().includes(text) || s.reg.toLowerCase().includes(text)) {
+                    rows += "<tr><td>" + s.reg + "</td><td>" + s.name + "</td><td>" + s.course + "</td><td>" + s.total + "</td><td>" + s.percentage + "%</td><td>" + s.grade + "</td><td class='" + s.status.toLowerCase() + "'>" + s.status + "</td></tr>";
+                }
+            }
+
+            if (rows == "") {
+                rows = "<tr><td colspan='7'>No student found</td></tr>";
+            }
+
+            document.getElementById('studentTable').innerHTML = rows;
+            document.getElementById('summary').innerHTML = "Total students : " + students.length + " | Passed : " + passed + " | Failed : " + (students.length - passed);
+        }
+
+        showTable();
+    </script>
+</body>
+</html>
