@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grade Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: lightgray;
+        }
+
+        .container {
+            width: 500px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border: 1px solid black;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+            padding: 8px;
+            margin: 5px 0 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Grade Calculator</h1>
+
+        <label>Student Name</label>
+        <input type="text" id="name">
+
+        <label>Maths Marks</label>
+        <input type="number" id="maths">
+
+        <label>Science Marks</label>
+        <input type="number" id="science">
+
+        <label>English Marks</label>
+        <input type="number" id="english">
+
+        <label>Computer Marks</label>
+        <input type="number" id="computer">
+
+        <label>Hindi Marks</label>
+        <input type="number" id="hindi">
+
+        <button onclick="calculate()">Calculate</button>
+        <button onclick="resetForm()">Reset</button>
+
+        <div id="result"></div>
+
+    </div>
+
+    <script>
+        function calculate() {
+
+            let name = document.getElementById("name").value;
+            let maths = Number(document.getElementById("maths").value);
+            let science = Number(document.getElementById("science").value);
+            let english = Number(document.getElementById("english").value);
+            let computer = Number(document.getElementById("computer").value);
+            let hindi = Number(document.getElementById("hindi").value);
+
+            if (name == "" || maths == "" || science == "" || english == "" || computer == "" || hindi == "") {
+                alert("Please enter all details");
+                return;
+            }
+
+            if (maths < 0 || maths > 100 ||
+                science < 0 || science > 100 ||
+                english < 0 || english > 100 ||
+                computer < 0 || computer > 100 ||
+                hindi < 0 || hindi > 100) {
+                alert("Marks should be between 0 and 100");
+                return;
+            }
+
+            let total = maths + science + english + computer + hindi;
+            let average = total / 5;
+            let percentage = (total / 500) * 100;
+
+            let grade;
+
+            if (percentage >= 90) {
+                grade = "A+";
+            } else if (percentage >= 80) {
+                grade = "A";
+            } else if (percentage >= 70) {
+                grade = "B";
+            } else if (percentage >= 60) {
+                grade = "C";
+            } else if (percentage >= 50) {
+                grade = "D";
+            } else {
+                grade = "F";
+            }
+
+            let result;
+
+            if (percentage >= 40) {
+                result = "Pass";
+            } else {
+                result = "Fail";
+            }
+
+            document.getElementById("result").innerHTML =
+                "<h3>Result</h3>" +
+                "Student Name: " + name + "<br>" +
+                "Total Marks: " + total + " / 500<br>" +
+                "Average: " + average.toFixed(2) + "<br>" +
+                "Percentage: " + percentage.toFixed(2) + "%<br>" +
+                "Grade: " + grade + "<br>" +
+                "Result: " + result;
+        }
+
+        function resetForm() {
+            document.getElementById("name").value = "";
+            document.getElementById("maths").value = "";
+            document.getElementById("science").value = "";
+            document.getElementById("english").value = "";
+            document.getElementById("computer").value = "";
+            document.getElementById("hindi").value = "";
+            document.getElementById("result").innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>
