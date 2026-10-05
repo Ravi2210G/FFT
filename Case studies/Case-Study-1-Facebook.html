@@ -1,0 +1,120 @@
+<html>
+   
+    <head>
+         <title>Facebook.com</title>
+         <style>
+            *{
+               margin:0;
+               padding:0;
+            }
+            .container{
+                display:flex;
+                justify-content:center;
+            }
+            .leftpart{
+                width: 60vw;
+            }
+            h1{
+                color:#0064e0;
+                padding-top:30vh;
+                text-align:center;
+            }
+            h2{
+                color:black;
+                font-size : 20px;
+                padding-left: 28px;
+            }
+            .Rightpart{
+                width:40vw;
+                display:flex;
+            }
+            .loginpage{
+                display: flex;
+                flex-direction:column;
+                background-color: #fff;
+                width:100%;
+                height:100vh;
+                box-shadow:-10px -10px 15px rgba(0,0,0,0.1);
+                padding:0px 35px 0px 0px;
+                font-family:Arial, Helvetica, sans-serif;
+            }
+            form{
+                padding-left:28px;
+                
+            }
+            input{
+                height:50px;
+                border: 2px solid gray;
+                border-radius:18px;
+                width:100%;
+                padding-left:20px;
+                font-size: 18px;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            input[type="submit"]{
+                padding:0px;
+                background:#0064e0;
+                border:none;
+                border-radius: 25px;
+            }
+            input[type="button"]{
+                border-radius: 25px;
+            }
+            #forget{
+                border:none;
+            }
+            #create{
+                color:#0064e0;
+                border:2px solid #0064e0;
+            }
+            input[type="submit"]:hover{
+                color:white;
+                background: #0112ff;
+                border:none;
+            }
+            input[type="button"]:hover{
+                color:white;
+                background: #0112ff;
+                border:none;
+            }
+            #create:hover{
+                color:white;
+                background: #0112ff;
+                border:none;
+            }
+         </style>
+
+    </head>
+    <body>
+        <div class="container">
+            <div class="leftpart">
+            
+            <h3> Explore the things you love</h3>
+            </div>
+
+            <div class ="RightPart">
+                <div class ="loginpage">
+                    <h1>Facebook</h1><br><br>
+                    <h2> Log in to Facebook</h2>
+                    <form>
+                        <label for="Username">Username</label><br>
+                        <input type="text" placeholder="Email">
+                        <br><br>
+                        <label for="Password">Password</label><br>
+                        <input type="password" placeholder="Password">
+                        <br>
+                        <br>
+                        <input type="submit">
+                        <br><br>
+                        <input type="button" id="forget" value="Forget password?">
+                        <br><br><br>
+                        <input type="button" id="create" value="Create New Account" id="Create_Account">   
+                    </form>
+
+                </div>
+                
+            </div>
+            
+        </div>
+    </body>
+</html> 
